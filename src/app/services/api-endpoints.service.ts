@@ -7,7 +7,7 @@ import { QueryStringParameters } from '../helper/query-string-parameters';
 @Injectable({ providedIn: 'root' })
 // Returns the api endpoints urls to use in services in a consistent way
 export class ApiEndpointsService {
-  public readonly API_ENDPOINT = 'https://api.trakt.tv/';
+  public readonly API_ENDPOINT = 'https://api.trakt.tv';
 
   /* #region URL CREATOR */
   // URL

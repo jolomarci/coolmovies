@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiHttpService } from './api-http.service';
 import { ApiEndpointsService } from './api-endpoints.service';
+import { AuthService } from './auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class MovieService {
@@ -11,12 +12,14 @@ export class MovieService {
 
   constructor(
     private http: ApiHttpService,
-    private endpoint: ApiEndpointsService
+    private endpoint: ApiEndpointsService,
+    private auth: AuthService
   ) {}
 
   getPopularMovies(): Observable<Movie[]> {
     return this.http.get(
-      this.endpoint.createUrlWithPathVariables('movies/popular')
+      this.endpoint.createUrl('movies/popular'),
+      this.auth.getHeaders()
     );
   }
 }
