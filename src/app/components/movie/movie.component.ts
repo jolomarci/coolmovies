@@ -1,30 +1,60 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import {
+  Component,
+  ChangeDetectorRef,
+  ViewChild,
+  ViewContainerRef,
+  TemplateRef,
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, of } from 'rxjs';
 import { Movie } from 'src/app/models/movie';
 import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
+  styleUrls: ['./movie.component.css'],
 })
 export class MovieComponent {
-  public movies: Movie[];
-  public moviesFromApi: Observable<Movie[]>;
-  public currentPage: number = 0;
-  maxPages: number = 0;
+  public movies: Observable<Movie[]>;
+  public currentPage: number = 1;
+  public maxPage: number = 0;
+  public loaded: boolean = false;
 
-  constructor(private movieServcie: MovieService) {}
+  constructor(
+    private movieServcie: MovieService,
+    private route: ActivatedRoute
+  ) {}
   ngOnInit() {
-    this.getPopularMovies();
+    this.loaded = false;
+    this.route.params.subscribe((params) => {
+      if (this.checkParam(+params['page'])) this.currentPage = +params['page'];
+      this.getPopularMovies(this.currentPage);
+    });
   }
 
-  getPopularMovies() {
-    this.moviesFromApi = this.movieServcie.getPopularMovies();
+  checkParam(param: number): boolean {
+    if (isNaN(param)) return false;
+    if (param < 0) return false;
+    if (param > this.maxPage) return false;
+    else return true;
+  }
+
+  getPopularMovies(pageNumber: number = 1) {
+    this.movieServcie.getPopularMovies(pageNumber).subscribe(
+      (data) => {
+        this.movies = of(data.results);
+        this.maxPage = data.total_pages;
+      },
+      (e) => {},
+      () => {
+        this.loaded = true;
+      }
+    );
   }
 
   getPoster(imageId: string): string {
     let pic = this.movieServcie.getMoviePosterLink(imageId, 'w500');
-    console.log('pic: ' + pic);
     return pic;
   }
 }

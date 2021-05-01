@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-    <div class="col" *ngFor="let movie of moviesFromApi | async">
-      <div class="card h-100">
+    <div class="col" *ngFor="let movie of movies | async">
+      <div class="card h-100" *ngIf="loaded">
         <img
           src="{{ getPoster(movie.poster_path) }}"
           class="card-img-top"
@@ -13,4 +13,36 @@
       </div>
     </div>
   </div>
+  <nav aria-label="...">
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        <a class="page-link" routerLink="/movies/{{ currentPage - 1 }}"
+          >Previous</a
+        >
+      </li>
+      <li class="page-item active">
+        <a class="page-link">{{ currentPage }}</a>
+      </li>
+      <li class="page-item">
+        <a
+          class="page-link"
+          routerLink="/movies/{{ currentPage + 1 }}"
+          routerLinkActive="active"
+          >{{ currentPage + 1 }}</a
+        >
+      </li>
+      <li class="page-item">
+        <a
+          class="page-link"
+          routerLink="/movies/{{ currentPage + 2 }}"
+          routerLinkActive="active"
+          >{{ currentPage + 2 }}</a
+        >
+      </li>
+
+      <li class="page-item">
+        <a class="page-link" routerLink="/movies/{{ currentPage + 1 }}">Next</a>
+      </li>
+    </ul>
+  </nav>
 </div>

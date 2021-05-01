@@ -7,24 +7,28 @@ import { ApiHttpService } from './api-http.service';
 import { ApiEndpointsService } from './api-endpoints.service';
 import { AuthService } from './auth.service';
 import { Page } from '../models/page';
+import { QueryStringParameters } from '../helper/query-string-parameters';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class MovieService {
   private page: Observable<Page>;
   private movies: Observable<Movie[]>;
 
   constructor(
     private http: ApiHttpService,
-    private http2: HttpClient,
     private endpoint: ApiEndpointsService,
     private auth: AuthService
   ) {}
 
-  getPopularMovies(): Observable<Movie[]> {
-    this.http
-      .get(this.endpoint.createUrl('movie/popular'), this.auth.getHeaders())
-      .subscribe((data) => (this.movies = of(data.results)));
-    return this.movies;
+  getPopularMovies(pageNumber: number = 1): Observable<Page> {
+    this.page = this.http.get(
+      this.endpoint.createUrlWithQueryParameters(
+        'movie/popular',
+        (qs: QueryStringParameters) => qs.push('page', pageNumber)
+      ),
+      this.auth.getHeaders()
+    );
+    return this.page;
   }
 
   getMoviePosterLink(imageId: string, size: string): string {
