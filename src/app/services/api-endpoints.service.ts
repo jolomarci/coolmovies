@@ -7,12 +7,21 @@ import { QueryStringParameters } from '../helper/query-string-parameters';
 @Injectable({ providedIn: 'root' })
 // Returns the api endpoints urls to use in services in a consistent way
 export class ApiEndpointsService {
-  public readonly API_ENDPOINT = 'https://api.trakt.tv';
+  public readonly API_ENDPOINT = 'https://api.themoviedb.org/3';
+  public readonly API_IMAGE_ENDPOINT = 'https://image.tmdb.org/t/p';
 
   /* #region URL CREATOR */
   // URL
   public createUrl(action: string): string {
     const urlBuilder: UrlBuilder = new UrlBuilder(this.API_ENDPOINT, action);
+    return urlBuilder.toString();
+  }
+
+  public createImageUrl(imageId: string, size: string): string {
+    const urlBuilder: UrlBuilder = new UrlBuilder(
+      this.API_IMAGE_ENDPOINT,
+      size + '/' + imageId
+    );
     return urlBuilder.toString();
   }
 

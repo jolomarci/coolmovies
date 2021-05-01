@@ -1,13 +1,14 @@
 <div class="container">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-    <div class="col" *ngFor="let movie of movies">
+    <div class="col" *ngFor="let movie of moviesFromApi | async">
       <div class="card h-100">
-        <img src="assets/avengers.jpg" class="card-img-top" alt="..." />
+        <img
+          src="{{ getPoster(movie.poster_path) }}"
+          class="card-img-top"
+          alt="..."
+        />
         <div class="card-body">
           <h5 class="card-title">{{ movie.title }}</h5>
-          <p class="card-text">
-            {{ movie.year }}
-          </p>
         </div>
       </div>
     </div>

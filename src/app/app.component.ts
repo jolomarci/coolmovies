@@ -9,19 +9,8 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   title = 'coolmovies';
-  private code: string;
-  constructor(
-    private authService: AuthService,
-    private route: ActivatedRoute
-  ) {}
-  ngOnInit() {
-    this.code = this.route.snapshot.queryParamMap.get('code');
-    if (this.code) {
-      this.authService.setCode(this.code);
-      this.authService.getAccessToken();
-    }
-  }
-  getAuthLink() {
-    return this.authService.getAuthorizationLink();
-  }
+
+  constructor() {}
+
+  ngOnInit(): void {}
 }

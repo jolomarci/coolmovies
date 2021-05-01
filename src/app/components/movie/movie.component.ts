@@ -4,7 +4,7 @@ import { Movie } from 'src/app/models/movie';
 import { MovieService } from 'src/app/services/movie.service';
 
 @Component({
-  selector: 'movie',
+  selector: 'app-movie',
   templateUrl: './movie.component.html',
 })
 export class MovieComponent {
@@ -15,12 +15,16 @@ export class MovieComponent {
 
   constructor(private movieServcie: MovieService) {}
   ngOnInit() {
-    this.movieServcie.getPopularMovies().subscribe((mov) => {
-      this.movies = mov;
-    });
+    this.getPopularMovies();
   }
 
   getPopularMovies() {
     this.moviesFromApi = this.movieServcie.getPopularMovies();
+  }
+
+  getPoster(imageId: string): string {
+    let pic = this.movieServcie.getMoviePosterLink(imageId, 'w500');
+    console.log('pic: ' + pic);
+    return pic;
   }
 }
