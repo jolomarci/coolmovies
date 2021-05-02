@@ -22,7 +22,7 @@ export class MovieComponent {
   public loaded: boolean = false;
 
   constructor(
-    private movieServcie: MovieService,
+    private movieService: MovieService,
     private route: ActivatedRoute
   ) {}
   ngOnInit() {
@@ -41,7 +41,7 @@ export class MovieComponent {
   }
 
   getPopularMovies(pageNumber: number = 1) {
-    this.movieServcie.getPopularMovies(pageNumber).subscribe(
+    this.movieService.getPopularMovies(pageNumber).subscribe(
       (data) => {
         this.movies = of(data.results);
         this.maxPage = data.total_pages;
@@ -54,7 +54,7 @@ export class MovieComponent {
   }
 
   getPoster(imageId: string): string {
-    let pic = this.movieServcie.getMoviePosterLink(imageId, 'w500');
+    let pic = this.movieService.getMoviePosterLink(imageId, 'w500');
     return pic;
   }
 }

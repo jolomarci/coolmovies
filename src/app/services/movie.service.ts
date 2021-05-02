@@ -8,6 +8,7 @@ import { ApiEndpointsService } from './api-endpoints.service';
 import { AuthService } from './auth.service';
 import { Page } from '../models/page';
 import { QueryStringParameters } from '../helper/query-string-parameters';
+import { SingleMovie } from '../models/single-movie';
 
 @Injectable()
 export class MovieService {
@@ -33,5 +34,16 @@ export class MovieService {
 
   getMoviePosterLink(imageId: string, size: string): string {
     return this.endpoint.createImageUrl(imageId, size);
+  }
+
+  getMovieById(id: number): Observable<SingleMovie> {
+    return this.http.get(
+      this.endpoint.createUrlWithPathVariables('movie', [id]),
+      this.auth.getHeaders()
+    );
+  }
+
+  getIMDBLink(id: number): string {
+    return this.endpoint.createIMDBUrl(id);
   }
 }
