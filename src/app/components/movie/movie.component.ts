@@ -17,9 +17,11 @@ import { MovieService } from 'src/app/services/movie.service';
 })
 export class MovieComponent {
   public movies: Observable<Movie[]>;
-  public currentPage: number = 1;
   public maxPage: number = 0;
   public loaded: boolean = false;
+
+  public currentPage: number = 1;
+  public currentType: string = 'popular';
 
   constructor(
     private movieService: MovieService,
@@ -29,19 +31,19 @@ export class MovieComponent {
     this.loaded = false;
     this.route.params.subscribe((params) => {
       if (this.checkParam(+params['page'])) this.currentPage = +params['page'];
-      this.getPopularMovies(this.currentPage);
+      this.getMovies(this.currentPage, this.currentType);
     });
   }
 
   checkParam(param: number): boolean {
     if (isNaN(param)) return false;
     if (param < 0) return false;
-    if (param > this.maxPage) return false;
+    //TODO if (param > this.maxPage) return false;
     else return true;
   }
 
-  getPopularMovies(pageNumber: number = 1) {
-    this.movieService.getPopularMovies(pageNumber).subscribe(
+  getMovies(pageNumber: number = 1, type: string = 'popular') {
+    this.movieService.getMovies(pageNumber, type).subscribe(
       (data) => {
         this.movies = of(data.results);
         this.maxPage = data.total_pages;
@@ -56,5 +58,10 @@ export class MovieComponent {
   getPoster(imageId: string): string {
     let pic = this.movieService.getMoviePosterLink(imageId, 'w500');
     return pic;
+  }
+
+  setType(type: string) {
+    this.currentType = type;
+    this.getMovies(this.currentPage, this.currentType);
   }
 }

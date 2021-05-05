@@ -21,10 +21,13 @@ export class MovieService {
     private auth: AuthService
   ) {}
 
-  getPopularMovies(pageNumber: number = 1): Observable<Page> {
+  getMovies(
+    pageNumber: number = 1,
+    type: string = 'popular'
+  ): Observable<Page> {
     this.page = this.http.get(
       this.endpoint.createUrlWithQueryParameters(
-        'movie/popular',
+        'movie/' + type,
         (qs: QueryStringParameters) => qs.push('page', pageNumber)
       ),
       this.auth.getHeaders()
@@ -33,7 +36,8 @@ export class MovieService {
   }
 
   getMoviePosterLink(imageId: string, size: string): string {
-    return this.endpoint.createImageUrl(imageId, size);
+    //return this.endpoint.createImageUrl(imageId, size);
+    return '/assets/avengers.jpg';
   }
 
   getMovieById(id: number): Observable<SingleMovie> {

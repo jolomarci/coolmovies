@@ -1,4 +1,30 @@
 <div class="container">
+  <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      [ngClass]="{ active: currentType === 'popular' }"
+      (click)="setType('popular')"
+    >
+      Popular
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      [ngClass]="{ active: currentType === 'top_rated' }"
+      (click)="setType('top_rated')"
+    >
+      Top Rated
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      (click)="setType('upcoming')"
+      [ngClass]="{ active: currentType === 'upcoming' }"
+    >
+      Upcoming
+    </button>
+  </div>
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
     <div class="col" *ngFor="let movie of movies | async">
       <div class="card h-100" *ngIf="loaded">
@@ -9,6 +35,9 @@
         />
         <div class="card-body">
           <h5 class="card-title">{{ movie.title }}</h5>
+          <p class="card-text" *ngIf="currentType === 'top_rated'">
+            {{ movie.vote_average }} ({{ movie.vote_count }})
+          </p>
           <a class="stretched-link" routerLink="/movie/{{ movie.id }}"></a>
         </div>
       </div>
@@ -25,20 +54,14 @@
         <a class="page-link">{{ currentPage }}</a>
       </li>
       <li class="page-item">
-        <a
-          class="page-link"
-          routerLink="/movies/{{ currentPage + 1 }}"
-          routerLinkActive="active"
-          >{{ currentPage + 1 }}</a
-        >
+        <a class="page-link" routerLink="/movies/{{ currentPage + 1 }}">{{
+          currentPage + 1
+        }}</a>
       </li>
       <li class="page-item">
-        <a
-          class="page-link"
-          routerLink="/movies/{{ currentPage + 2 }}"
-          routerLinkActive="active"
-          >{{ currentPage + 2 }}</a
-        >
+        <a class="page-link" routerLink="/movies/{{ currentPage + 2 }}">{{
+          currentPage + 2
+        }}</a>
       </li>
 
       <li class="page-item">
