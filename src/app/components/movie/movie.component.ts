@@ -21,7 +21,8 @@ export class MovieComponent {
   public loaded: boolean = false;
 
   public currentPage: number = 1;
-  public currentType: string = 'popular';
+  public currentSortBy: string = 'popularity';
+  public currentGenre: string = '';
 
   constructor(
     private movieService: MovieService,
@@ -29,21 +30,28 @@ export class MovieComponent {
   ) {}
   ngOnInit() {
     this.loaded = false;
-    this.route.params.subscribe((params) => {
-      if (this.checkParam(+params['page'])) this.currentPage = +params['page'];
-      this.getMovies(this.currentPage, this.currentType);
+    this.currentSortBy = this.route.snapshot.queryParams.type;
+    console.log(this.currentSortBy);
+    this.currentGenre = this.route.snapshot.queryParams.genre;
+    this.route.queryParams.subscribe((params) => {
+      this.currentPage = this.checkParam(+params.page);
+      this.currentGenre = params.genre !== undefined ? params.genre : 'all';
+      this.currentSortBy =
+        params.sortBy !== undefined ? params.sortBy : 'popularity';
+      console.log(this.currentPage, this.currentGenre, this.currentSortBy);
+      this.getMovies(this.currentPage, this.currentGenre, this.currentSortBy);
     });
   }
 
-  checkParam(param: number): boolean {
-    if (isNaN(param)) return false;
-    if (param < 0) return false;
+  checkParam(param: number): number {
+    if (isNaN(param)) return 1;
+    if (param < 0) return 1;
     //TODO if (param > this.maxPage) return false;
-    else return true;
+    else return param;
   }
 
-  getMovies(pageNumber: number = 1, type: string = 'popular') {
-    this.movieService.getMovies(pageNumber, type).subscribe(
+  getMovies(pageNumber: number, genre: string, sortBy: string) {
+    this.movieService.getMovies(pageNumber, genre, sortBy).subscribe(
       (data) => {
         this.movies = of(data.results);
         this.maxPage = data.total_pages;
@@ -56,12 +64,8 @@ export class MovieComponent {
   }
 
   getPoster(imageId: string): string {
-    let pic = this.movieService.getMoviePosterLink(imageId, 'w500');
-    return pic;
-  }
-
-  setType(type: string) {
-    this.currentType = type;
-    this.getMovies(this.currentPage, this.currentType);
+    if (imageId == null) return 'assets/placeholder.png';
+    let imageLink = this.movieService.getMoviePosterLink(imageId, 'w500');
+    return imageLink;
   }
 }

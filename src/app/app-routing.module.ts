@@ -7,6 +7,8 @@ import { SingleMovieComponent } from './components/single-movie/single-movie.com
 const routes: Routes = [
   { path: 'movies', component: MovieComponent },
   { path: 'movies/:page', component: MovieComponent },
+  { path: 'movies/:genre', component: MovieComponent },
+  { path: 'movies/:genre/:page', component: MovieComponent },
   { path: 'movie/:id', component: SingleMovieComponent },
 ];
 

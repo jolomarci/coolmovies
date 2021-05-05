@@ -9,7 +9,7 @@ import { MovieService } from 'src/app/services/movie.service';
   styleUrls: ['./single-movie.component.css'],
 })
 export class SingleMovieComponent implements OnInit {
-  public movie!: SingleMovie;
+  public movie: SingleMovie;
   public loaded: boolean = false;
   constructor(
     private movieService: MovieService,
@@ -28,8 +28,9 @@ export class SingleMovieComponent implements OnInit {
   }
 
   getPoster(imageId: string): string {
-    let pic = this.movieService.getMoviePosterLink(imageId, 'original');
-    return pic;
+    if (imageId == null) return 'assets/placeholder.png';
+    let imageLink = this.movieService.getMoviePosterLink(imageId, 'w500');
+    return imageLink;
   }
 
   getIMDB(id: number): string {

@@ -8,7 +8,7 @@ import { ApiEndpointsService } from './api-endpoints.service';
 import { AuthService } from './auth.service';
 import { Page } from '../models/page';
 import { QueryStringParameters } from '../helper/query-string-parameters';
-import { SingleMovie } from '../models/single-movie';
+import { Genre, SingleMovie } from '../models/single-movie';
 
 @Injectable()
 export class MovieService {
@@ -22,22 +22,40 @@ export class MovieService {
   ) {}
 
   getMovies(
-    pageNumber: number = 1,
-    type: string = 'popular'
+    pageNumber: number,
+    genre: string,
+    sortBy: string
   ): Observable<Page> {
-    this.page = this.http.get(
+    return this.http.get(
       this.endpoint.createUrlWithQueryParameters(
-        'movie/' + type,
-        (qs: QueryStringParameters) => qs.push('page', pageNumber)
+        'discover/movie/',
+        (qs: QueryStringParameters) => {
+          qs.push('page', pageNumber);
+          if (genre !== 'all') qs.push('with_genre', genre);
+          qs.push('sort_by', sortBy + '.desc');
+        }
       ),
       this.auth.getHeaders()
     );
-    return this.page;
+  }
+
+  getMoviesByGenre(
+    pageNumber: number = 1,
+    genreName: string
+  ): Observable<Page> {
+    return this.http.get(
+      this.endpoint.createUrlWithQueryParameters(
+        'discover/movie/',
+        (qs: QueryStringParameters) => {
+          qs.push('page', pageNumber), qs.push('with_genre', genreName);
+        }
+      ),
+      this.auth.getHeaders()
+    );
   }
 
   getMoviePosterLink(imageId: string, size: string): string {
-    //return this.endpoint.createImageUrl(imageId, size);
-    return '/assets/avengers.jpg';
+    return this.endpoint.createImageUrl(imageId, size);
   }
 
   getMovieById(id: number): Observable<SingleMovie> {

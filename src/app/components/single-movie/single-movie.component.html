@@ -44,6 +44,15 @@
             <p class="no-margin-bottom">
               {{ movie.overview }}
             </p>
+            <h5>
+              <a
+                *ngFor="let genre of movie.genres"
+                [routerLink]="['/movies']"
+                [queryParams]="{ genre: genre.name }"
+                class="badge badge-pill badge-secondary"
+                >{{ genre.name }}</a
+              >
+            </h5>
           </div>
         </div>
 
