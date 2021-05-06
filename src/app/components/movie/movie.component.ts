@@ -43,14 +43,14 @@ export class MovieComponent {
     });
   }
 
-  checkParam(param: number): number {
+  private checkParam(param: number): number {
     if (isNaN(param)) return 1;
     if (param < 0) return 1;
     //TODO if (param > this.maxPage) return false;
     else return param;
   }
 
-  getMovies(pageNumber: number, genre: string, sortBy: string) {
+  public getMovies(pageNumber: number, genre: string, sortBy: string) {
     this.movieService.getMovies(pageNumber, genre, sortBy).subscribe(
       (data) => {
         this.movies = of(data.results);
@@ -63,7 +63,7 @@ export class MovieComponent {
     );
   }
 
-  getPoster(imageId: string): string {
+  public getPoster(imageId: string): string {
     if (imageId == null) return 'assets/placeholder.png';
     let imageLink = this.movieService.getMoviePosterLink(imageId, 'w500');
     return imageLink;

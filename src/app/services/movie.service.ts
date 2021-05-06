@@ -21,7 +21,7 @@ export class MovieService {
     private auth: AuthService
   ) {}
 
-  getMovies(
+  public getMovies(
     pageNumber: number,
     genre: string,
     sortBy: string
@@ -39,7 +39,7 @@ export class MovieService {
     );
   }
 
-  getMoviesByGenre(
+  public getMoviesByGenre(
     pageNumber: number = 1,
     genreName: string
   ): Observable<Page> {
@@ -54,18 +54,18 @@ export class MovieService {
     );
   }
 
-  getMoviePosterLink(imageId: string, size: string): string {
+  public getMoviePosterLink(imageId: string, size: string): string {
     return this.endpoint.createImageUrl(imageId, size);
   }
 
-  getMovieById(id: number): Observable<SingleMovie> {
+  public getMovieById(id: number): Observable<SingleMovie> {
     return this.http.get(
       this.endpoint.createUrlWithPathVariables('movie', [id]),
       this.auth.getHeaders()
     );
   }
 
-  getIMDBLink(id: number): string {
+  public getIMDBLink(id: number): string {
     return this.endpoint.createIMDBUrl(id);
   }
 }
