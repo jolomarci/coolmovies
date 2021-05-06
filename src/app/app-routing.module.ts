@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'movies/:genre/:page', component: MovieComponent },
   { path: 'movie/:id', component: SingleMovieComponent },
 
-  { path: 'series', component: SerieComponent },
+  { path: 'series', redirectTo: 'series/1' },
   { path: 'series/:page', component: SerieComponent },
 ];
 

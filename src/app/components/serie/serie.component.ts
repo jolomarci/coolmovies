@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { UtilService } from '../../services/util.service';
 import { Serie } from '../../models/serie';
@@ -20,6 +20,7 @@ export class SerieComponent implements OnInit {
   constructor(
     private serieService: SerieService,
     private route: ActivatedRoute,
+    public router: Router,
     private utils: UtilService
   ) {}
 
@@ -27,6 +28,7 @@ export class SerieComponent implements OnInit {
     this.loaded = false;
     this.route.params.subscribe((params) => {
       this.currentPage = this.utils.checkPageParam(+params['page']);
+      console.log(this.currentPage, this.currentSortBy);
       this.getSeries();
     });
   }
@@ -49,7 +51,6 @@ export class SerieComponent implements OnInit {
 
   public setSortBy(value: string) {
     this.currentSortBy = value;
-    console.log(this.currentSortBy);
-    this.ngOnInit();
+    this.router.navigate(['/series/1']);
   }
 }

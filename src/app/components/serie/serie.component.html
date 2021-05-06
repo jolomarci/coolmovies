@@ -7,7 +7,7 @@
       [ngClass]="{ active: currentSortBy === 'popular' }"
       (click)="setSortBy('popular')"
     >
-      Popular
+      Popular Now
     </button>
     <button
       type="button"
@@ -23,7 +23,7 @@
       [ngClass]="{ active: currentSortBy === 'on_the_air' }"
       (click)="setSortBy('on_the_air')"
     >
-      On the air
+      On The Air
     </button>
   </div>
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
@@ -36,25 +36,18 @@
         />
         <div class="card-body">
           <h5 class="card-title">{{ serie.name }}</h5>
-          <!-- <p class="card-text" *ngIf="currentSortBy === 'vote_average'">
-            {{ movie.vote_average }} ({{ movie.vote_count }})
-          </p> -->
+          <p class="card-text" *ngIf="currentSortBy === 'top_rated'">
+            {{ serie.vote_average }} ({{ serie.vote_count }})
+          </p>
           <a class="stretched-link" routerLink="/serie/{{ serie.id }}"></a>
         </div>
       </div>
     </div>
   </div>
-  <!-- <nav aria-label="...">
+  <nav aria-label="...">
     <ul class="pagination justify-content-center">
       <li class="page-item">
-        <a
-          class="page-link"
-          routerLink="/series"
-          [queryParams]="{
-            page: currentPage - 1,
-            genre: currentGenre,
-            sortBy: currentSortBy
-          }"
+        <a class="page-link" routerLink="/series/{{ currentPage - 1 }}"
           >Previous</a
         >
       </li>
@@ -62,42 +55,19 @@
         <a class="page-link">{{ currentPage }}</a>
       </li>
       <li class="page-item">
-        <a
-          class="page-link"
-          routerLink="/series"
-          [queryParams]="{
-            page: currentPage + 1,
-            genre: currentGenre,
-            sortBy: currentSortBy
-          }"
-          >{{ currentPage + 1 }}</a
-        >
+        <a class="page-link" routerLink="/series{{ currentPage + 1 }}">{{
+          currentPage + 1
+        }}</a>
       </li>
       <li class="page-item">
-        <a
-          class="page-link"
-          routerLink="/series"
-          [queryParams]="{
-            page: currentPage + 2,
-            genre: currentGenre,
-            sortBy: currentSortBy
-          }"
-          >{{ currentPage + 2 }}</a
-        >
+        <a class="page-link" routerLink="/series/{{ currentPage + 2 }}">{{
+          currentPage + 2
+        }}</a>
       </li>
 
       <li class="page-item">
-        <a
-          class="page-link"
-          routerLink="/series"
-          [queryParams]="{
-            page: currentPage + 1,
-            genre: currentGenre,
-            sortBy: currentSortBy
-          }"
-          >Next</a
-        >
+        <a class="page-link" routerLink="/series/{{ currentPage + 1 }}">Next</a>
       </li>
     </ul>
-  </nav> -->
+  </nav>
 </div>

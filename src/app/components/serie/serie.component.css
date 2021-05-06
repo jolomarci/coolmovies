@@ -20,6 +20,10 @@
   cursor: pointer;
 }
 
+.card-text {
+  margin-bottom: 0 !important;
+}
+
 .card-title {
   margin-bottom: 0 !important;
 }
