@@ -50,7 +50,9 @@ export class SerieComponent implements OnInit {
   }
 
   public setSortBy(value: string) {
+    console.log(value);
     this.currentSortBy = value;
     this.router.navigate(['/series/1']);
+    this.ngOnInit();
   }
 }

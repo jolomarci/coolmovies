@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { SingleSerie } from 'src/app/models/single-serie';
+import { Season, SingleSerie } from 'src/app/models/single-serie';
 import { SerieService } from 'src/app/services/serie.service';
 import { UtilService } from 'src/app/services/util.service';
 
@@ -12,6 +12,7 @@ import { UtilService } from 'src/app/services/util.service';
 export class SingleSerieComponent implements OnInit {
   public serie: SingleSerie;
   public loaded: boolean = false;
+  public selectedSeason: Season;
   constructor(
     private serieService: SerieService,
     private route: ActivatedRoute,
@@ -22,7 +23,10 @@ export class SingleSerieComponent implements OnInit {
     this.loaded = false;
     let id: number = +this.route.snapshot.params['id'];
     this.serieService.getSerieById(id).subscribe(
-      (serie) => (this.serie = serie),
+      (serie) => {
+        this.serie = serie;
+        this.selectedSeason = serie.seasons[0];
+      },
       (e) => {},
       () => (this.loaded = true)
     );

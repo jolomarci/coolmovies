@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { QueryStringParameters } from '../helper/query-string-parameters';
+import { Season } from '../models/season';
 import { SingleSerie } from '../models/single-serie';
 import { ApiEndpointsService } from './api-endpoints.service';
 import { ApiHttpService } from './api-http.service';
@@ -29,6 +30,17 @@ export class SerieService {
   public getSerieById(id: number): Observable<SingleSerie> {
     return this.http.get(
       this.endpoint.createUrlWithPathVariables('tv', [id]),
+      this.auth.getHeaders()
+    );
+  }
+
+  public getSeasonById(serieId: number, seasonId: number): Observable<Season> {
+    return this.http.get(
+      this.endpoint.createUrlWithPathVariables('tv', [
+        serieId,
+        'season',
+        seasonId,
+      ]),
       this.auth.getHeaders()
     );
   }
