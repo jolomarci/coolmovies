@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { QueryStringParameters } from '../helper/query-string-parameters';
+import { SingleSerie } from '../models/single-serie';
 import { ApiEndpointsService } from './api-endpoints.service';
 import { ApiHttpService } from './api-http.service';
 import { AuthService } from './auth.service';
@@ -20,6 +22,13 @@ export class SerieService {
         'tv/' + action,
         (qs: QueryStringParameters) => qs.push('page', pageNumber)
       ),
+      this.auth.getHeaders()
+    );
+  }
+
+  public getSerieById(id: number): Observable<SingleSerie> {
+    return this.http.get(
+      this.endpoint.createUrlWithPathVariables('tv', [id]),
       this.auth.getHeaders()
     );
   }

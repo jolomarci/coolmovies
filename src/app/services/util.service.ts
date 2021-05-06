@@ -20,4 +20,8 @@ export class UtilService {
     if (imageId == null) return 'assets/placeholder.png';
     else return this.endpoint.createImageUrl(imageId, size);
   }
+
+  public getIMDBLink(id: number): string {
+    return this.endpoint.createIMDBUrl(id);
+  }
 }
