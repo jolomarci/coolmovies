@@ -4,7 +4,7 @@
       <div class="row no-gutters">
         <div class="col-md-4">
           <img
-            src="{{ getPoster(episode.still_path) }}"
+            src="{{ utils.getImage(episode.still_path, 'w500') }}"
             class="card-img"
             alt="..."
           />
@@ -18,7 +18,9 @@
               {{ episode.overview }}
             </p>
             <p class="card-text">
-              <small class="text-muted">{{ episode.air_date }}</small>
+              <small class="text-muted">{{
+                utils.formatDate(episode.air_date)
+              }}</small>
             </p>
           </div>
         </div>

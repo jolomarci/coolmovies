@@ -14,7 +14,7 @@ export class SeasonComponent implements OnChanges {
 
   public season: Season;
   public loadedSeason: boolean = false;
-  constructor(private serieService: SerieService, private utils: UtilService) {}
+  constructor(private serieService: SerieService, public utils: UtilService) {}
 
   ngOnChanges(): void {
     this.loadedSeason = false;
@@ -24,9 +24,5 @@ export class SeasonComponent implements OnChanges {
       (e) => {},
       () => (this.loadedSeason = true)
     );
-  }
-
-  getPoster(imageId: string): string {
-    return this.utils.getImage(imageId, 'w500');
   }
 }

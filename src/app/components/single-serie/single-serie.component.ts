@@ -31,12 +31,4 @@ export class SingleSerieComponent implements OnInit {
       () => (this.loaded = true)
     );
   }
-
-  getPoster(imageId: string): string {
-    return this.utils.getImage(imageId, 'w500');
-  }
-
-  getIMDB(id: number): string {
-    return this.utils.getIMDBLink(id);
-  }
 }

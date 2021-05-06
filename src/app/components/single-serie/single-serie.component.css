@@ -29,6 +29,10 @@ body {
   letter-spacing: 0.8px;
   margin-top: 20px;
 }
+
+.btn {
+  min-width: fit-content;
+}
 .font-size38 {
   font-size: 38px;
 }
