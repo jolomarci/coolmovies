@@ -41,7 +41,7 @@
             <a
               *ngFor="let genre of serie.genres"
               [routerLink]="['/series']"
-              [queryParams]="{ genre: genre.name }"
+              [queryParams]="{ genre: genre.id }"
               class="badge badge-pill badge-secondary"
               >{{ genre.name }}</a
             >

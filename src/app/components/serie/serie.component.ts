@@ -16,6 +16,7 @@ export class SerieComponent implements OnInit {
 
   public currentPage: number = 1;
   public currentSortBy: string = 'popular';
+  public currentGenre: string;
 
   constructor(
     private serieService: SerieService,
@@ -26,14 +27,18 @@ export class SerieComponent implements OnInit {
 
   ngOnInit(): void {
     this.loaded = false;
+    this.currentGenre = this.route.snapshot.queryParams['genre'];
     this.route.params.subscribe((params) => {
       this.currentPage = this.utils.checkPageParam(+params['page']);
-      console.log(this.currentPage, this.currentSortBy);
-      this.getSeries();
+      console.log(this.currentPage, this.currentSortBy, this.currentGenre);
+      console.log(this.currentGenre !== undefined);
+      if (this.currentGenre !== undefined) this.getSeriesWithGenre();
+      else this.getSeries();
     });
   }
 
   getSeries() {
+    console.log('szia');
     this.serieService.getSeries(this.currentPage, this.currentSortBy).subscribe(
       (data) => {
         this.series = of(data.results);
@@ -45,8 +50,19 @@ export class SerieComponent implements OnInit {
     );
   }
 
-  public getPoster(imageId: string): string {
-    return this.utils.getImage(imageId, 'w500');
+  getSeriesWithGenre() {
+    console.log('halo');
+    this.serieService
+      .getSeriesWithGenre(this.currentPage, this.currentGenre)
+      .subscribe(
+        (data) => {
+          this.series = of(data.results);
+        },
+        (e) => {},
+        () => {
+          this.loaded = true;
+        }
+      );
   }
 
   public setSortBy(value: string) {

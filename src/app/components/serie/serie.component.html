@@ -34,7 +34,7 @@
     <div class="col" *ngFor="let serie of series | async">
       <div class="card h-100" *ngIf="loaded">
         <img
-          src="{{ getPoster(serie.poster_path) }}"
+          src="{{ utils.getImage(serie.poster_path, 'w500') }}"
           class="card-img-top"
           alt="..."
         />

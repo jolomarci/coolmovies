@@ -27,6 +27,20 @@ export class SerieService {
     );
   }
 
+  public getSeriesWithGenre(pageNumber: number, genre: string) {
+    return this.http.get(
+      this.endpoint.createUrlWithQueryParameters(
+        'discover/tv',
+        (qs: QueryStringParameters) => {
+          qs.push('sort_by', 'popularity.desc');
+          qs.push('page', pageNumber);
+          qs.push('with_genres', genre);
+        }
+      ),
+      this.auth.getHeaders()
+    );
+  }
+
   public getSerieById(id: number): Observable<SingleSerie> {
     return this.http.get(
       this.endpoint.createUrlWithPathVariables('tv', [id]),
