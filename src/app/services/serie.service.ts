@@ -27,14 +27,14 @@ export class SerieService {
     );
   }
 
-  public getSeriesWithGenre(pageNumber: number, genre: string) {
+  public getSeriesByGenre(pageNumber: number, genreId: string) {
     return this.http.get(
       this.endpoint.createUrlWithQueryParameters(
         'discover/tv',
         (qs: QueryStringParameters) => {
           qs.push('sort_by', 'popularity.desc');
           qs.push('page', pageNumber);
-          qs.push('with_genres', genre);
+          qs.push('with_genres', genreId);
         }
       ),
       this.auth.getHeaders()

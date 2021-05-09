@@ -21,41 +21,31 @@ export class MovieService {
     private auth: AuthService
   ) {}
 
-  public getMovies(
-    pageNumber: number,
-    genre: string,
-    sortBy: string
-  ): Observable<Page> {
+  public getMovies(pageNumber: number, action: string): Observable<Page> {
     return this.http.get(
       this.endpoint.createUrlWithQueryParameters(
-        'discover/movie/',
-        (qs: QueryStringParameters) => {
-          qs.push('page', pageNumber);
-          if (genre !== 'all') qs.push('with_genre', genre);
-          qs.push('sort_by', sortBy + '.desc');
-        }
+        'movie/' + action,
+        (qs: QueryStringParameters) => qs.push('page', pageNumber)
       ),
       this.auth.getHeaders()
     );
   }
 
   public getMoviesByGenre(
-    pageNumber: number = 1,
-    genreName: string
+    pageNumber: number,
+    genreId: string
   ): Observable<Page> {
     return this.http.get(
       this.endpoint.createUrlWithQueryParameters(
-        'discover/movie/',
+        'discover/movie',
         (qs: QueryStringParameters) => {
-          qs.push('page', pageNumber), qs.push('with_genre', genreName);
+          qs.push('sort_by', 'popularity.desc');
+          qs.push('page', pageNumber);
+          qs.push('with_genres', genreId);
         }
       ),
       this.auth.getHeaders()
     );
-  }
-
-  public getMoviePosterLink(imageId: string, size: string): string {
-    return this.endpoint.createImageUrl(imageId, size);
   }
 
   public getMovieById(id: number): Observable<SingleMovie> {

@@ -13,7 +13,7 @@
       <div class="row">
         <div class="col-lg-4 col-md-5 xs-margin-30px-bottom">
           <div class="team-single-img">
-            <img src="{{ getPoster(movie.poster_path) }}" alt="" />
+            <img src="{{ utils.getImage(movie.poster_path, 'w500') }}" alt="" />
           </div>
           <div
             class="bg-light-gray padding-30px-all md-padding-25px-all sm-padding-20px-all"
@@ -48,7 +48,7 @@
               <a
                 *ngFor="let genre of movie.genres"
                 [routerLink]="['/movies']"
-                [queryParams]="{ genre: genre.name }"
+                [queryParams]="{ genre: genre.id }"
                 class="badge badge-pill badge-secondary"
                 >{{ genre.name }}</a
               >

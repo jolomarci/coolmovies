@@ -1,44 +1,42 @@
 <div class="container">
+  <h1 class="mt-4">Movies</h1>
   <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
     <button
       type="button"
       class="btn btn-secondary"
-      [ngClass]="{ active: currentSortBy === 'popularity' }"
-      [routerLink]="['/movies']"
-      [queryParams]="{ sortBy: 'popularity' }"
+      [ngClass]="{ active: currentSortBy === 'popular' }"
+      (click)="setSortBy('popular')"
     >
-      Popular
+      Popular Now
     </button>
     <button
       type="button"
       class="btn btn-secondary"
-      [ngClass]="{ active: currentSortBy === 'vote_average' }"
-      [routerLink]="['/movies']"
-      [queryParams]="{ sortBy: 'vote_average' }"
+      [ngClass]="{ active: currentSortBy === 'top_rated' }"
+      (click)="setSortBy('top_rated')"
     >
       Top Rated
     </button>
     <button
       type="button"
       class="btn btn-secondary"
-      [ngClass]="{ active: currentSortBy === 'primary_release_date' }"
-      [routerLink]="['/movies']"
-      [queryParams]="{ sortBy: 'primary_release_date' }"
+      [ngClass]="{ active: currentSortBy === 'now_playing' }"
+      (click)="setSortBy('now_playing')"
     >
-      Upcoming
+      Now Playing
     </button>
   </div>
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
     <div class="col" *ngFor="let movie of movies | async">
       <div class="card h-100" *ngIf="loaded">
         <img
-          src="{{ getPoster(movie.poster_path) }}"
+          src="{{ utils.getImage(movie.poster_path, 'w500') }}"
           class="card-img-top"
           alt="..."
         />
         <div class="card-body">
           <h5 class="card-title">{{ movie.title }}</h5>
-          <p class="card-text" *ngIf="currentSortBy === 'vote_average'">
+          <p class="card-text" *ngIf="currentSortBy === 'top_rated'">
             {{ movie.vote_average }} ({{ movie.vote_count }})
           </p>
           <a class="stretched-link" routerLink="/movie/{{ movie.id }}"></a>
@@ -49,14 +47,7 @@
   <nav aria-label="...">
     <ul class="pagination justify-content-center">
       <li class="page-item">
-        <a
-          class="page-link"
-          routerLink="/movies"
-          [queryParams]="{
-            page: currentPage - 1,
-            genre: currentGenre,
-            sortBy: currentSortBy
-          }"
+        <a class="page-link" routerLink="/movies/{{ currentPage - 1 }}"
           >Previous</a
         >
       </li>
@@ -64,41 +55,18 @@
         <a class="page-link">{{ currentPage }}</a>
       </li>
       <li class="page-item">
-        <a
-          class="page-link"
-          routerLink="/movies"
-          [queryParams]="{
-            page: currentPage + 1,
-            genre: currentGenre,
-            sortBy: currentSortBy
-          }"
-          >{{ currentPage + 1 }}</a
-        >
+        <a class="page-link" routerLink="/movies/{{ currentPage + 1 }}">{{
+          currentPage + 1
+        }}</a>
       </li>
       <li class="page-item">
-        <a
-          class="page-link"
-          routerLink="/movies"
-          [queryParams]="{
-            page: currentPage + 2,
-            genre: currentGenre,
-            sortBy: currentSortBy
-          }"
-          >{{ currentPage + 2 }}</a
-        >
+        <a class="page-link" routerLink="/movies/{{ currentPage + 2 }}">{{
+          currentPage + 2
+        }}</a>
       </li>
 
       <li class="page-item">
-        <a
-          class="page-link"
-          routerLink="/movies"
-          [queryParams]="{
-            page: currentPage + 1,
-            genre: currentGenre,
-            sortBy: currentSortBy
-          }"
-          >Next</a
-        >
+        <a class="page-link" routerLink="/movies/{{ currentPage + 1 }}">Next</a>
       </li>
     </ul>
   </nav>

@@ -1,57 +1,45 @@
-import {
-  Component,
-  ChangeDetectorRef,
-  ViewChild,
-  ViewContainerRef,
-  TemplateRef,
-} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Movie } from 'src/app/models/movie';
 import { MovieService } from 'src/app/services/movie.service';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
   styleUrls: ['./movie.component.css'],
 })
-export class MovieComponent {
+export class MovieComponent implements OnInit {
   public movies: Observable<Movie[]>;
   public maxPage: number = 0;
   public loaded: boolean = false;
 
   public currentPage: number = 1;
-  public currentSortBy: string = 'popularity';
-  public currentGenre: string = '';
+  public currentSortBy: string = 'popular';
+  public currentGenre: string;
 
   constructor(
     private movieService: MovieService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public router: Router,
+    public utils: UtilService
   ) {}
-  ngOnInit() {
+
+  ngOnInit(): void {
+    console.log('heli');
     this.loaded = false;
-    this.currentSortBy = this.route.snapshot.queryParams.type;
-    console.log(this.currentSortBy);
-    this.currentGenre = this.route.snapshot.queryParams.genre;
-    this.route.queryParams.subscribe((params) => {
-      this.currentPage = this.checkParam(+params.page);
-      this.currentGenre = params.genre !== undefined ? params.genre : 'all';
-      this.currentSortBy =
-        params.sortBy !== undefined ? params.sortBy : 'popularity';
-      console.log(this.currentPage, this.currentGenre, this.currentSortBy);
-      this.getMovies(this.currentPage, this.currentGenre, this.currentSortBy);
+    this.currentGenre = this.route.snapshot.queryParams['genre'];
+    this.route.params.subscribe((params) => {
+      this.currentPage = this.utils.checkPageParam(+params['page']);
+      console.log(this.currentPage, this.currentSortBy, this.currentGenre);
+      if (this.currentGenre !== undefined) this.getMoviesByGenre();
+      else this.getMovies();
     });
   }
 
-  private checkParam(param: number): number {
-    if (isNaN(param)) return 1;
-    if (param < 0) return 1;
-    //TODO if (param > this.maxPage) return false;
-    else return param;
-  }
-
-  public getMovies(pageNumber: number, genre: string, sortBy: string) {
-    this.movieService.getMovies(pageNumber, genre, sortBy).subscribe(
+  public getMovies() {
+    this.movieService.getMovies(this.currentPage, this.currentSortBy).subscribe(
       (data) => {
         this.movies = of(data.results);
         this.maxPage = data.total_pages;
@@ -63,9 +51,24 @@ export class MovieComponent {
     );
   }
 
-  public getPoster(imageId: string): string {
-    if (imageId == null) return 'assets/placeholder.png';
-    let imageLink = this.movieService.getMoviePosterLink(imageId, 'w500');
-    return imageLink;
+  getMoviesByGenre() {
+    this.movieService
+      .getMoviesByGenre(this.currentPage, this.currentGenre)
+      .subscribe(
+        (data) => {
+          this.movies = of(data.results);
+        },
+        (e) => {},
+        () => {
+          this.loaded = true;
+        }
+      );
+  }
+
+  public setSortBy(value: string) {
+    console.log(value);
+    this.currentSortBy = value;
+    this.router.navigate(['/movies/1']);
+    this.ngOnInit();
   }
 }

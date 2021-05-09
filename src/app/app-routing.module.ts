@@ -7,11 +7,9 @@ import { SerieComponent } from './components/serie/serie.component';
 import { SingleSerieComponent } from './components/single-serie/single-serie.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/movies', pathMatch: 'full' },
-  { path: 'movies', component: MovieComponent },
+  //{ path: '', redirectTo: '/movies/1', pathMatch: 'full' },
+  { path: 'movies', redirectTo: 'movies/1' },
   { path: 'movies/:page', component: MovieComponent },
-  { path: 'movies/:genre', component: MovieComponent },
-  { path: 'movies/:genre/:page', component: MovieComponent },
   { path: 'movie/:id', component: SingleMovieComponent },
 
   { path: 'series', redirectTo: 'series/1' },

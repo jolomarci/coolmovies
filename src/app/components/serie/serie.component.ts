@@ -31,14 +31,12 @@ export class SerieComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.currentPage = this.utils.checkPageParam(+params['page']);
       console.log(this.currentPage, this.currentSortBy, this.currentGenre);
-      console.log(this.currentGenre !== undefined);
-      if (this.currentGenre !== undefined) this.getSeriesWithGenre();
+      if (this.currentGenre !== undefined) this.getSeriesByGenre();
       else this.getSeries();
     });
   }
 
   getSeries() {
-    console.log('szia');
     this.serieService.getSeries(this.currentPage, this.currentSortBy).subscribe(
       (data) => {
         this.series = of(data.results);
@@ -50,10 +48,9 @@ export class SerieComponent implements OnInit {
     );
   }
 
-  getSeriesWithGenre() {
-    console.log('halo');
+  getSeriesByGenre() {
     this.serieService
-      .getSeriesWithGenre(this.currentPage, this.currentGenre)
+      .getSeriesByGenre(this.currentPage, this.currentGenre)
       .subscribe(
         (data) => {
           this.series = of(data.results);

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SingleMovie } from 'src/app/models/single-movie';
 import { MovieService } from 'src/app/services/movie.service';
+import { UtilService } from 'src/app/services/util.service';
 
 @Component({
   selector: 'app-single-movie',
@@ -13,7 +14,8 @@ export class SingleMovieComponent implements OnInit {
   public loaded: boolean = false;
   constructor(
     private movieService: MovieService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public utils: UtilService
   ) {}
 
   ngOnInit(): void {
@@ -25,12 +27,6 @@ export class SingleMovieComponent implements OnInit {
       (e) => {},
       () => (this.loaded = true)
     );
-  }
-
-  getPoster(imageId: string): string {
-    if (imageId == null) return 'assets/placeholder.png';
-    let imageLink = this.movieService.getMoviePosterLink(imageId, 'w500');
-    return imageLink;
   }
 
   getIMDB(id: number): string {
