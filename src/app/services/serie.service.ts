@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { QueryStringParameters } from '../helper/query-string-parameters';
+import { Season } from '../models/season';
+import { SingleSerie } from '../models/single-serie';
 import { ApiEndpointsService } from './api-endpoints.service';
 import { ApiHttpService } from './api-http.service';
 import { AuthService } from './auth.service';
@@ -20,6 +23,38 @@ export class SerieService {
         'tv/' + action,
         (qs: QueryStringParameters) => qs.push('page', pageNumber)
       ),
+      this.auth.getHeaders()
+    );
+  }
+
+  public getSeriesWithGenre(pageNumber: number, genre: string) {
+    return this.http.get(
+      this.endpoint.createUrlWithQueryParameters(
+        'discover/tv',
+        (qs: QueryStringParameters) => {
+          qs.push('sort_by', 'popularity.desc');
+          qs.push('page', pageNumber);
+          qs.push('with_genres', genre);
+        }
+      ),
+      this.auth.getHeaders()
+    );
+  }
+
+  public getSerieById(id: number): Observable<SingleSerie> {
+    return this.http.get(
+      this.endpoint.createUrlWithPathVariables('tv', [id]),
+      this.auth.getHeaders()
+    );
+  }
+
+  public getSeasonById(serieId: number, seasonId: number): Observable<Season> {
+    return this.http.get(
+      this.endpoint.createUrlWithPathVariables('tv', [
+        serieId,
+        'season',
+        seasonId,
+      ]),
       this.auth.getHeaders()
     );
   }

@@ -1,0 +1,91 @@
+body,
+html {
+  height: 100%;
+}
+
+img.bg {
+  z-index: -100;
+  /* Set rules to fill background */
+  height: 100%;
+
+  /* Set up proportionate scaling */
+  width: 100%;
+
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.container {
+  padding-top: 40px;
+}
+
+body {
+  font-size: 16px;
+  color: #6f6f6f;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0.8px;
+  margin-top: 20px;
+}
+
+.btn {
+  min-width: fit-content;
+}
+.font-size38 {
+  font-size: 38px;
+}
+.team-single-text .section-heading h4,
+.section-heading h5 {
+  font-size: 36px;
+}
+
+.team-single-text .section-heading.half {
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 1199px) {
+  .team-single-text .section-heading h4,
+  .section-heading h5 {
+    font-size: 32px;
+  }
+  .team-single-text .section-heading.half {
+    margin-bottom: 15px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .team-single-text .section-heading h4,
+  .section-heading h5 {
+    font-size: 28px;
+  }
+  .team-single-text .section-heading.half {
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .team-single-text .section-heading h4,
+  .section-heading h5 {
+    font-size: 24px;
+  }
+}
+
+.padding-30px-all {
+  padding: 30px;
+}
+.bg-light-gray {
+  background-color: #f7f7f7;
+}
+.text-center {
+  text-align: center !important;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.badge {
+  margin-right: 5px;
+}

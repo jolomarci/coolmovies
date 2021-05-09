@@ -4,16 +4,19 @@ import { AppComponent } from './app.component';
 import { MovieComponent } from './components/movie/movie.component';
 import { SingleMovieComponent } from './components/single-movie/single-movie.component';
 import { SerieComponent } from './components/serie/serie.component';
+import { SingleSerieComponent } from './components/single-serie/single-serie.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/movies', pathMatch: 'full' },
   { path: 'movies', component: MovieComponent },
   { path: 'movies/:page', component: MovieComponent },
   { path: 'movies/:genre', component: MovieComponent },
   { path: 'movies/:genre/:page', component: MovieComponent },
   { path: 'movie/:id', component: SingleMovieComponent },
 
-  { path: 'series', component: SerieComponent },
+  { path: 'series', redirectTo: 'series/1' },
   { path: 'series/:page', component: SerieComponent },
+  { path: 'serie/:id', component: SingleSerieComponent },
 ];
 
 @NgModule({

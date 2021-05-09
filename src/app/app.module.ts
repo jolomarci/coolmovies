@@ -11,6 +11,8 @@ import { SingleMovieComponent } from './components/single-movie/single-movie.com
 import { SerieComponent } from './components/serie/serie.component';
 import { SerieService } from './services/serie.service';
 import { UtilService } from './services/util.service';
+import { SingleSerieComponent } from './components/single-serie/single-serie.component';
+import { SeasonComponent } from './components/season/season.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { UtilService } from './services/util.service';
     NavbarComponent,
     SingleMovieComponent,
     SerieComponent,
+    SingleSerieComponent,
+    SeasonComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [MovieService, SerieService, UtilService],

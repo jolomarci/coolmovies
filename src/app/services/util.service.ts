@@ -20,4 +20,17 @@ export class UtilService {
     if (imageId == null) return 'assets/placeholder.png';
     else return this.endpoint.createImageUrl(imageId, size);
   }
+
+  public getIMDBLink(id: number): string {
+    return this.endpoint.createIMDBUrl(id);
+  }
+
+  public formatDate(date: string): string {
+    let splitted = date.split('-');
+    let formatted = '';
+    splitted.forEach((value) => {
+      formatted = formatted.concat(value + '. ');
+    });
+    return formatted;
+  }
 }
