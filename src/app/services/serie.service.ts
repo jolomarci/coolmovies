@@ -41,6 +41,13 @@ export class SerieService {
     );
   }
 
+  public getSeasonCast(id: number, season: number) {
+    return this.http.get(
+      this.endpoint.createUrl('tv/' + id + '/season/' + season + '/credits'),
+      this.auth.getHeaders()
+    );
+  }
+
   public getSerieById(id: number): Observable<SingleSerie> {
     return this.http.get(
       this.endpoint.createUrlWithPathVariables('tv', [id]),

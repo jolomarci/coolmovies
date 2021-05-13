@@ -48,14 +48,17 @@ export class MovieService {
     );
   }
 
+  public getCast(id: number) {
+    return this.http.get(
+      this.endpoint.createUrl('movie/' + id + '/credits'),
+      this.auth.getHeaders()
+    );
+  }
+
   public getMovieById(id: number): Observable<SingleMovie> {
     return this.http.get(
       this.endpoint.createUrlWithPathVariables('movie', [id]),
       this.auth.getHeaders()
     );
-  }
-
-  public getIMDBLink(id: number): string {
-    return this.endpoint.createIMDBUrl(id);
   }
 }

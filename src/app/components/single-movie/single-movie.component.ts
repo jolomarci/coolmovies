@@ -12,6 +12,7 @@ import { UtilService } from 'src/app/services/util.service';
 export class SingleMovieComponent implements OnInit {
   public movie: SingleMovie;
   public loaded: boolean = false;
+  public type: string = 'movie';
   constructor(
     private movieService: MovieService,
     private route: ActivatedRoute,
@@ -27,9 +28,5 @@ export class SingleMovieComponent implements OnInit {
       (e) => {},
       () => (this.loaded = true)
     );
-  }
-
-  getIMDB(id: number): string {
-    return this.movieService.getIMDBLink(id);
   }
 }

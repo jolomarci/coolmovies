@@ -1,0 +1,23 @@
+.card {
+  max-width: 115px;
+}
+
+.card-body {
+  padding: 5px;
+}
+
+.card-title {
+  font-size: 14px;
+  margin-bottom: 2px !important;
+}
+
+.card-text {
+  font-size: 12px;
+  margin-bottom: 0px !important;
+}
+
+.col {
+  padding-bottom: 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+}

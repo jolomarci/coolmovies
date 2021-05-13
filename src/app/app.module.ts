@@ -13,6 +13,7 @@ import { SerieService } from './services/serie.service';
 import { UtilService } from './services/util.service';
 import { SingleSerieComponent } from './components/single-serie/single-serie.component';
 import { SeasonComponent } from './components/season/season.component';
+import { CastComponent } from './components/cast/cast.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { SeasonComponent } from './components/season/season.component';
     SerieComponent,
     SingleSerieComponent,
     SeasonComponent,
+    CastComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [MovieService, SerieService, UtilService],

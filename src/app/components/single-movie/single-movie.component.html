@@ -29,7 +29,7 @@
             </p>
             <a
               class="sm-width-95 sm-margin-auto text-center"
-              href="{{ getIMDB(movie.imdb_id) }}"
+              href="{{ utils.getIMDBLink(movie.imdb_id) }}"
             >
               <b>IMDB</b>
             </a>
@@ -54,9 +54,9 @@
               >
             </h5>
           </div>
+          <app-cast [type]="type" [typeId]="movie.id"></app-cast>
+          <div class="col-md-12"></div>
         </div>
-
-        <div class="col-md-12"></div>
       </div>
     </div>
   </div>

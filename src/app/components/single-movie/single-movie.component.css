@@ -85,3 +85,11 @@ img {
 .badge {
   margin-right: 5px;
 }
+
+.card-title {
+  padding-top: 10px;
+}
+
+.card-body {
+  padding: 0px;
+}

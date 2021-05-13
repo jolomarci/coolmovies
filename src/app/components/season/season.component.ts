@@ -14,11 +14,16 @@ export class SeasonComponent implements OnChanges {
 
   public season: Season;
   public loadedSeason: boolean = false;
+  public type: string = 'serie';
   constructor(private serieService: SerieService, public utils: UtilService) {}
 
   ngOnChanges(): void {
     this.loadedSeason = false;
     console.log(this.seasonId, this.serieId);
+    this.getSeason();
+  }
+
+  getSeason() {
     this.serieService.getSeasonById(this.serieId, this.seasonId).subscribe(
       (season) => (this.season = season),
       (e) => {},
