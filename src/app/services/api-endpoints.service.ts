@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { UrlBuilder } from '../helper/url-builder';
 import { QueryStringParameters } from '../helper/query-string-parameters';
 
+// with help from https://github.com/georgeroubie/Angular-API-calls-the-right-way
+
 /**
  * Service for creating URL's for API HTTP requests
  */

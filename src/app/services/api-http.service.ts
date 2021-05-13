@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+// with help from https://github.com/georgeroubie/Angular-API-calls-the-right-way
+
 /**
  * Wrapper service for creating HTTP requests
  * this way you can return any type of Observable

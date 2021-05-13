@@ -1,3 +1,5 @@
+// with help from https://github.com/georgeroubie/Angular-API-calls-the-right-way
+
 /**
  * Helper class for creating query parameters for HTTP requests
  */

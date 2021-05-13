@@ -23,6 +23,10 @@ export class SingleSerieComponent implements OnInit {
   ngOnInit(): void {
     this.loaded = false;
     let id: number = +this.route.snapshot.params['id'];
+    this.getSerie(id);
+  }
+
+  getSerie(id: number) {
     this.serieService.getSerieById(id).subscribe(
       (serie) => {
         this.serie = serie;
