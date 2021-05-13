@@ -1,4 +1,4 @@
-<div class="container" *ngIf="loaded">
+<div *ngIf="loaded">
   <div class="team-single">
     <div class="row">
       <div class="col-lg-4 col-md-5 xs-margin-30px-bottom">
@@ -30,23 +30,19 @@
       </div>
 
       <div class="col-lg-8 col-md-7">
-        <div class="team-single-text padding-50px-left sm-no-padding-left">
-          <h4 class="font-size38 sm-font-size32 xs-font-size30">
-            {{ serie.name }}
-          </h4>
-          <p class="no-margin-bottom">
-            {{ serie.overview }}
-          </p>
-          <h5>
-            <a
-              *ngFor="let genre of serie.genres"
-              [routerLink]="['/series']"
-              [queryParams]="{ genre: genre.id }"
-              class="badge badge-pill badge-secondary"
-              >{{ genre.name }}</a
-            >
-          </h5>
-        </div>
+        <h1 class="display-4">{{ serie.name }}</h1>
+        <p class="no-margin-bottom">
+          {{ serie.overview }}
+        </p>
+        <h5>
+          <a
+            *ngFor="let genre of serie.genres"
+            [routerLink]="['/series']"
+            [queryParams]="{ genre: genre.id }"
+            class="badge badge-pill badge-secondary"
+            >{{ genre.name }}</a
+          >
+        </h5>
 
         <h3 class="mt-4">Seasons</h3>
         <div class="overflow-auto">

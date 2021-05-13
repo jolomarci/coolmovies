@@ -1,6 +1,10 @@
-<div class="container">
+<div *ngIf="!searchState">
   <h1 class="mt-4">Movies</h1>
-  <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
+  <div
+    class="btn-group btn-group-lg mt-3"
+    role="group"
+    aria-label="Basic example"
+  >
     <button
       type="button"
       class="btn btn-secondary"
@@ -26,48 +30,48 @@
       Now Playing
     </button>
   </div>
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-    <div class="col" *ngFor="let movie of movies | async">
-      <div class="card h-100" *ngIf="loaded">
-        <img
-          src="{{ utils.getImage(movie.poster_path, 'w500') }}"
-          class="card-img-top"
-          alt="..."
-        />
-        <div class="card-body">
-          <h5 class="card-title">{{ movie.title }}</h5>
-          <p class="card-text" *ngIf="currentSortBy === 'top_rated'">
-            {{ movie.vote_average }} ({{ movie.vote_count }})
-          </p>
-          <a class="stretched-link" routerLink="/movie/{{ movie.id }}"></a>
-        </div>
+</div>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+  <div class="col" *ngFor="let movie of movies | async">
+    <div class="card h-100" *ngIf="loaded">
+      <img
+        src="{{ utils.getImage(movie.poster_path, 'w500') }}"
+        class="card-img-top"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ movie.title }}</h5>
+        <p class="card-text" *ngIf="currentSortBy === 'top_rated'">
+          {{ movie.vote_average }} ({{ movie.vote_count }})
+        </p>
+        <a class="stretched-link" routerLink="/movie/{{ movie.id }}"></a>
       </div>
     </div>
   </div>
-  <nav aria-label="...">
-    <ul class="pagination justify-content-center">
-      <li class="page-item">
-        <a class="page-link" routerLink="/movies/{{ currentPage - 1 }}"
-          >Previous</a
-        >
-      </li>
-      <li class="page-item active">
-        <a class="page-link">{{ currentPage }}</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" routerLink="/movies/{{ currentPage + 1 }}">{{
-          currentPage + 1
-        }}</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" routerLink="/movies/{{ currentPage + 2 }}">{{
-          currentPage + 2
-        }}</a>
-      </li>
-
-      <li class="page-item">
-        <a class="page-link" routerLink="/movies/{{ currentPage + 1 }}">Next</a>
-      </li>
-    </ul>
-  </nav>
 </div>
+<nav aria-label="...">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a class="page-link" routerLink="/movies/{{ currentPage - 1 }}"
+        >Previous</a
+      >
+    </li>
+    <li class="page-item active">
+      <a class="page-link">{{ currentPage }}</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" routerLink="/movies/{{ currentPage + 1 }}">{{
+        currentPage + 1
+      }}</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" routerLink="/movies/{{ currentPage + 2 }}">{{
+        currentPage + 2
+      }}</a>
+    </li>
+
+    <li class="page-item">
+      <a class="page-link" routerLink="/movies/{{ currentPage + 1 }}">Next</a>
+    </li>
+  </ul>
+</nav>

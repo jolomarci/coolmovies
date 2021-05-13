@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Movie } from 'src/app/models/movie';
@@ -19,6 +19,9 @@ export class MovieComponent implements OnInit {
   public currentSortBy: string = 'popular';
   public currentGenre: string;
 
+  @Input('searchText') searchText: string;
+  public searchState: boolean = false;
+
   constructor(
     private movieService: MovieService,
     private route: ActivatedRoute,
@@ -27,15 +30,27 @@ export class MovieComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('heli');
     this.loaded = false;
     this.currentGenre = this.route.snapshot.queryParams['genre'];
     this.route.params.subscribe((params) => {
       this.currentPage = this.utils.checkPageParam(+params['page']);
       console.log(this.currentPage, this.currentSortBy, this.currentGenre);
       if (this.currentGenre !== undefined) this.getMoviesByGenre();
-      else this.getMovies();
+      else if (this.searchText !== undefined) {
+        console.log(this.searchText);
+        this.searchState = true;
+        this.searchMovies();
+      } else this.getMovies();
     });
+  }
+  searchMovies() {
+    this.movieService.searchMovies(this.currentPage, this.searchText).subscribe(
+      (data) => (this.movies = of(data.results)),
+      (e) => {},
+      () => {
+        this.loaded = true;
+      }
+    );
   }
 
   public getMovies() {

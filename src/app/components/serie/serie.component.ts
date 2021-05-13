@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { UtilService } from '../../services/util.service';
@@ -18,6 +18,9 @@ export class SerieComponent implements OnInit {
   public currentSortBy: string = 'popular';
   public currentGenre: string;
 
+  @Input('searchText') searchText: string;
+  public searchState: boolean = false;
+
   constructor(
     private serieService: SerieService,
     private route: ActivatedRoute,
@@ -32,8 +35,24 @@ export class SerieComponent implements OnInit {
       this.currentPage = this.utils.checkPageParam(+params['page']);
       console.log(this.currentPage, this.currentSortBy, this.currentGenre);
       if (this.currentGenre !== undefined) this.getSeriesByGenre();
-      else this.getSeries();
+      else if (this.searchText !== undefined) {
+        console.log(this.searchText);
+        this.searchState = true;
+        this.searchSeries();
+      } else this.getSeries();
     });
+  }
+
+  searchSeries() {
+    this.serieService.searchSeries(this.currentPage, this.searchText).subscribe(
+      (data) => {
+        this.series = of(data.results);
+      },
+      (e) => {},
+      () => {
+        this.loaded = true;
+      }
+    );
   }
 
   getSeries() {

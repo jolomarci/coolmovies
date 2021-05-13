@@ -5,16 +5,19 @@ import { MovieComponent } from './components/movie/movie.component';
 import { SingleMovieComponent } from './components/single-movie/single-movie.component';
 import { SerieComponent } from './components/serie/serie.component';
 import { SingleSerieComponent } from './components/single-serie/single-serie.component';
+import { SearchComponent } from './components/search/search.component';
 
 const routes: Routes = [
-  //{ path: '', redirectTo: '/movies/1', pathMatch: 'full' },
-  { path: 'movies', redirectTo: 'movies/1' },
+  { path: '', redirectTo: '/movies/1', pathMatch: 'full' },
+  { path: 'movies', redirectTo: 'movies/1', pathMatch: 'full' },
   { path: 'movies/:page', component: MovieComponent },
   { path: 'movie/:id', component: SingleMovieComponent },
 
-  { path: 'series', redirectTo: 'series/1' },
+  { path: 'series', redirectTo: 'series/1', pathMatch: 'full' },
   { path: 'series/:page', component: SerieComponent },
   { path: 'serie/:id', component: SingleSerieComponent },
+
+  { path: 'search', component: SearchComponent },
 ];
 
 @NgModule({

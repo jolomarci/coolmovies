@@ -26,12 +26,22 @@
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input
+        [(ngModel)]="searchText"
         class="form-control mr-sm-2"
+        name="search"
         type="search"
-        placeholder="Search for something cool to watch"
+        [attr.placeholder]="
+          searchText
+            ? searchText !== undefined
+            : 'Search for something cool to watch'
+        "
         aria-label="Search"
       />
-      <button class="btn btn-secondary my-2 my-sm-0" type="submit">
+      <button
+        class="btn btn-secondary my-2 my-sm-0"
+        type="submit"
+        (click)="searchRedirect(searchText)"
+      >
         Search
       </button>
     </form>

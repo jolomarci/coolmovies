@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="!searchState">
   <h1 class="mt-4">Series</h1>
   <div
     class="btn-group btn-group-lg mt-3"
@@ -30,48 +30,48 @@
       On The Air
     </button>
   </div>
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-    <div class="col" *ngFor="let serie of series | async">
-      <div class="card h-100" *ngIf="loaded">
-        <img
-          src="{{ utils.getImage(serie.poster_path, 'w500') }}"
-          class="card-img-top"
-          alt="..."
-        />
-        <div class="card-body">
-          <h5 class="card-title">{{ serie.name }}</h5>
-          <p class="card-text" *ngIf="currentSortBy === 'top_rated'">
-            {{ serie.vote_average }} ({{ serie.vote_count }})
-          </p>
-          <a class="stretched-link" routerLink="/serie/{{ serie.id }}"></a>
-        </div>
+</div>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+  <div class="col" *ngFor="let serie of series | async">
+    <div class="card h-100" *ngIf="loaded">
+      <img
+        src="{{ utils.getImage(serie.poster_path, 'w500') }}"
+        class="card-img-top"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ serie.name }}</h5>
+        <p class="card-text" *ngIf="currentSortBy === 'top_rated'">
+          {{ serie.vote_average }} ({{ serie.vote_count }})
+        </p>
+        <a class="stretched-link" routerLink="/serie/{{ serie.id }}"></a>
       </div>
     </div>
   </div>
-  <nav aria-label="...">
-    <ul class="pagination justify-content-center">
-      <li class="page-item">
-        <a class="page-link" routerLink="/series/{{ currentPage - 1 }}"
-          >Previous</a
-        >
-      </li>
-      <li class="page-item active">
-        <a class="page-link">{{ currentPage }}</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" routerLink="/series/{{ currentPage + 1 }}">{{
-          currentPage + 1
-        }}</a>
-      </li>
-      <li class="page-item">
-        <a class="page-link" routerLink="/series/{{ currentPage + 2 }}">{{
-          currentPage + 2
-        }}</a>
-      </li>
-
-      <li class="page-item">
-        <a class="page-link" routerLink="/series/{{ currentPage + 1 }}">Next</a>
-      </li>
-    </ul>
-  </nav>
 </div>
+<nav aria-label="...">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a class="page-link" routerLink="/series/{{ currentPage - 1 }}"
+        >Previous</a
+      >
+    </li>
+    <li class="page-item active">
+      <a class="page-link">{{ currentPage }}</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" routerLink="/series/{{ currentPage + 1 }}">{{
+        currentPage + 1
+      }}</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" routerLink="/series/{{ currentPage + 2 }}">{{
+        currentPage + 2
+      }}</a>
+    </li>
+
+    <li class="page-item">
+      <a class="page-link" routerLink="/series/{{ currentPage + 1 }}">Next</a>
+    </li>
+  </ul>
+</nav>

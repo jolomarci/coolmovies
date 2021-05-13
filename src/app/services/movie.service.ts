@@ -31,6 +31,19 @@ export class MovieService {
     );
   }
 
+  public searchMovies(pageNumber: number, searchText: string) {
+    return this.http.get(
+      this.endpoint.createUrlWithQueryParameters(
+        'search/movie',
+        (qs: QueryStringParameters) => {
+          qs.push('page', pageNumber);
+          qs.push('query', searchText);
+        }
+      ),
+      this.auth.getHeaders()
+    );
+  }
+
   public getMoviesByGenre(
     pageNumber: number,
     genreId: string

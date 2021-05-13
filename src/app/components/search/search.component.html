@@ -1,0 +1,31 @@
+<div class="container">
+  <h1 class="mt-4">{{ contentType }} for '{{ searchText }}'</h1>
+  <div
+    class="btn-group btn-group-lg mt-3"
+    role="group"
+    aria-label="Basic example"
+  >
+    <button
+      type="button"
+      class="btn btn-secondary"
+      [ngClass]="{ active: contentType === 'Movies' }"
+      (click)="contentType = 'Movies'"
+    >
+      Movies
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      [ngClass]="{ active: contentType === 'Series' }"
+      (click)="contentType = 'Series'"
+    >
+      Series
+    </button>
+  </div>
+  <div *ngIf="contentType === 'Movies'">
+    <app-movie [searchText]="searchText"></app-movie>
+  </div>
+  <div *ngIf="contentType === 'Series'">
+    <app-serie [searchText]="searchText"></app-serie>
+  </div>
+</div>

@@ -27,6 +27,19 @@ export class SerieService {
     );
   }
 
+  public searchSeries(pageNumber: number, searchText: string) {
+    return this.http.get(
+      this.endpoint.createUrlWithQueryParameters(
+        'search/tv',
+        (qs: QueryStringParameters) => {
+          qs.push('page', pageNumber);
+          qs.push('query', searchText);
+        }
+      ),
+      this.auth.getHeaders()
+    );
+  }
+
   public getSeriesByGenre(pageNumber: number, genreId: string) {
     return this.http.get(
       this.endpoint.createUrlWithQueryParameters(

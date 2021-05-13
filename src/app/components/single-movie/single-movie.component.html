@@ -1,6 +1,4 @@
 <div *ngIf="loaded">
-  <!-- <img class="bg" src="{{ getPoster(movie.backdrop_path) }}" alt="" /> -->
-
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
@@ -37,23 +35,17 @@
         </div>
 
         <div class="col-lg-8 col-md-7">
-          <div class="team-single-text padding-50px-left sm-no-padding-left">
-            <h4 class="font-size38 sm-font-size32 xs-font-size30">
-              {{ movie.title }}
-            </h4>
-            <p class="no-margin-bottom">
-              {{ movie.overview }}
-            </p>
-            <h5>
-              <a
-                *ngFor="let genre of movie.genres"
-                [routerLink]="['/movies']"
-                [queryParams]="{ genre: genre.id }"
-                class="badge badge-pill badge-secondary"
-                >{{ genre.name }}</a
-              >
-            </h5>
-          </div>
+          <h1 class="display-4">{{ movie.title }}</h1>
+          <p>{{ movie.overview }}</p>
+          <h5>
+            <a
+              *ngFor="let genre of movie.genres"
+              [routerLink]="['/movies']"
+              [queryParams]="{ genre: genre.id }"
+              class="badge badge-pill badge-secondary"
+              >{{ genre.name }}</a
+            >
+          </h5>
           <app-cast [type]="type" [typeId]="movie.id"></app-cast>
           <div class="col-md-12"></div>
         </div>

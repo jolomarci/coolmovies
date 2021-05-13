@@ -14,6 +14,8 @@ import { UtilService } from './services/util.service';
 import { SingleSerieComponent } from './components/single-serie/single-serie.component';
 import { SeasonComponent } from './components/season/season.component';
 import { CastComponent } from './components/cast/cast.component';
+import { SearchComponent } from './components/search/search.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,8 +27,9 @@ import { CastComponent } from './components/cast/cast.component';
     SingleSerieComponent,
     SeasonComponent,
     CastComponent,
+    SearchComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [MovieService, SerieService, UtilService],
   bootstrap: [AppComponent],
 })
