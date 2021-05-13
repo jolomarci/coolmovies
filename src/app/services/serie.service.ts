@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { QueryStringParameters } from '../helper/query-string-parameters';
 import { Season } from '../models/season';
+import { Serie } from '../models/serie';
 import { SingleSerie } from '../models/single-serie';
 import { ApiEndpointsService } from './api-endpoints.service';
 import { ApiHttpService } from './api-http.service';
@@ -85,5 +86,16 @@ export class SerieService {
    */
   public handleError(error) {
     this.http.handleError(error);
+  }
+
+  public loadSeries() {
+    return JSON.parse(localStorage.getItem('series'));
+  }
+
+  public saveSeries(serie: Serie) {
+    let series: Serie[] = this.loadSeries();
+    if (series == null) series = [];
+    series.push(serie);
+    localStorage.setItem('series', JSON.stringify(series));
   }
 }

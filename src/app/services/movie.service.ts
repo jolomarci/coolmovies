@@ -6,6 +6,7 @@ import { AuthService } from './auth.service';
 import { Page } from '../models/page';
 import { QueryStringParameters } from '../helper/query-string-parameters';
 import { SingleMovie } from '../models/single-movie';
+import { Movie } from '../models/movie';
 
 @Injectable()
 export class MovieService {
@@ -75,5 +76,16 @@ export class MovieService {
    */
   public handleError(error) {
     this.http.handleError(error);
+  }
+
+  public loadMovies() {
+    return JSON.parse(localStorage.getItem('movies'));
+  }
+
+  public saveMovie(movie: SingleMovie) {
+    let movies: SingleMovie[] = this.loadMovies();
+    if (movies == null) movies = [];
+    movies.push(movie);
+    localStorage.setItem('movies', JSON.stringify(movies));
   }
 }

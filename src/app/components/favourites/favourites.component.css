@@ -1,0 +1,44 @@
+.col {
+  padding-top: 40px;
+}
+
+.pagination {
+  padding-top: 40px;
+}
+
+.page-item.active .page-link {
+  color: #fff !important;
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+}
+
+.page-item.disabled .page-link {
+  color: #6c757d !important;
+}
+
+.page-item .page-link {
+  color: #343a40 !important;
+}
+
+.card {
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+  cursor: pointer;
+}
+
+.card-text {
+  margin-bottom: 0 !important;
+}
+
+.card-title {
+  margin-bottom: 0 !important;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+}

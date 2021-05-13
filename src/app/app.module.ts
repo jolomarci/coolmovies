@@ -16,6 +16,7 @@ import { SeasonComponent } from './components/season/season.component';
 import { CastComponent } from './components/cast/cast.component';
 import { SearchComponent } from './components/search/search.component';
 import { FormsModule } from '@angular/forms';
+import { FavouritesComponent } from './components/favourites/favourites.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { FormsModule } from '@angular/forms';
     SeasonComponent,
     CastComponent,
     SearchComponent,
+    FavouritesComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [MovieService, SerieService, UtilService],

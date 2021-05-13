@@ -1,0 +1,32 @@
+<h1 class="mt-4">Favourite Movies</h1>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+  <div class="col" *ngFor="let movie of movies">
+    <div class="card h-100">
+      <img
+        src="{{ utils.getImage(movie.poster_path, 'w500') }}"
+        class="card-img-top"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ movie.title }}</h5>
+        <a class="stretched-link" routerLink="/movie/{{ movie.id }}"></a>
+      </div>
+    </div>
+  </div>
+</div>
+<h1 class="mt-4">Favourite Series</h1>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+  <div class="col" *ngFor="let serie of series">
+    <div class="card h-100">
+      <img
+        src="{{ utils.getImage(serie.poster_path, 'w500') }}"
+        class="card-img-top"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ serie.name }}</h5>
+        <a class="stretched-link" routerLink="/serie/{{ serie.id }}"></a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,6 +6,7 @@ import { SingleMovieComponent } from './components/single-movie/single-movie.com
 import { SerieComponent } from './components/serie/serie.component';
 import { SingleSerieComponent } from './components/single-serie/single-serie.component';
 import { SearchComponent } from './components/search/search.component';
+import { FavouritesComponent } from './components/favourites/favourites.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/movies/1', pathMatch: 'full' }, //redirects to page 1
@@ -18,6 +19,8 @@ const routes: Routes = [
   { path: 'serie/:id', component: SingleSerieComponent },
 
   { path: 'search', component: SearchComponent },
+
+  { path: 'favourites', component: FavouritesComponent },
 ];
 
 @NgModule({

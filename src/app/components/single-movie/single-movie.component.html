@@ -16,6 +16,13 @@
           class="bg-light-gray padding-30px-all md-padding-25px-all sm-padding-20px-all"
         >
           <p class="sm-width-95 sm-margin-auto">
+            <button class="btn btn-secondary" (click)="addFavourite(movie)">
+              <i [ngClass]="favourite ? 'fa fa-star' : 'far fa-star'"></i>
+              {{ favourite ? "Favourite" : "Add to favorites" }}
+            </button>
+          </p>
+
+          <p class="sm-width-95 sm-margin-auto">
             <b>Original title: </b> {{ movie.original_title }}
           </p>
           <p class="sm-width-95 sm-margin-auto">

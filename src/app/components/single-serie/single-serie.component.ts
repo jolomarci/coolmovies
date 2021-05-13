@@ -13,6 +13,7 @@ export class SingleSerieComponent implements OnInit {
   public serie: SingleSerie;
   public loaded: boolean = false;
   public selectedSeason: Season;
+  public favourite: boolean = false;
   constructor(
     private serieService: SerieService,
     private route: ActivatedRoute,
@@ -26,11 +27,26 @@ export class SingleSerieComponent implements OnInit {
       (serie) => {
         this.serie = serie;
         this.selectedSeason = serie.seasons[0];
+        this.setFavourite();
       },
       (error) => {
         this.serieService.handleError(error);
       },
       () => (this.loaded = true)
     );
+  }
+
+  setFavourite() {
+    let series: SingleSerie[] = JSON.parse(localStorage.getItem('series'));
+    if (series !== null) {
+      series.forEach((serie) => {
+        if (serie.id == this.serie.id) this.favourite = true;
+      });
+    }
+  }
+
+  addFavourite(serie) {
+    this.serieService.saveSeries(serie);
+    this.setFavourite();
   }
 }
