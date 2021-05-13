@@ -79,6 +79,10 @@ export class SerieService {
     );
   }
 
+  /**
+   * Forwards occuring error to request handler
+   * @param error
+   */
   public handleError(error) {
     this.http.handleError(error);
   }

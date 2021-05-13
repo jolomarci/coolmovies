@@ -1,15 +1,14 @@
-// Angular Modules
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-// RxJs
 import { Observable } from 'rxjs';
 
+/**
+ * Wrapper service for creating HTTP requests
+ * this way you can return any type of Observable
+ */
 @Injectable({ providedIn: 'root' })
 export class ApiHttpService {
-  constructor(
-    // Angular Modules
-    private http: HttpClient
-  ) {}
+  constructor(private http: HttpClient) {}
 
   public get = (url: string, options?: any): Observable<any> =>
     this.http.get(url, options);
@@ -23,6 +22,11 @@ export class ApiHttpService {
   public delete = (url: string, options?: any): Observable<any> =>
     this.http.delete(url, options);
 
+  /**
+   * Logs errors
+   * TODO: Show errors to users as well
+   * @param error
+   */
   public handleError(error) {
     console.log(error.status, error.error.status_message);
   }

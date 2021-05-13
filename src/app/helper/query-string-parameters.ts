@@ -1,3 +1,6 @@
+/**
+ * Helper class for creating query parameters for HTTP requests
+ */
 export class QueryStringParameters {
   private paramsAndValues: string[];
 

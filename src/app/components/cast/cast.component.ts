@@ -10,8 +10,13 @@ import { UtilService } from 'src/app/services/util.service';
   styleUrls: ['./cast.component.css'],
 })
 export class CastComponent implements OnInit {
+  /** 'movie' or 'serie, decides the used getter*/
   @Input('type') type: string;
+
+  /** Content id*/
   @Input('typeId') typeId: number;
+
+  /** Additional season id for series*/
   @Input('seasonId') seasonId: number;
 
   public cast: People[];
@@ -25,7 +30,6 @@ export class CastComponent implements OnInit {
 
   ngOnInit(): void {
     this.loaded = false;
-    console.log(this.type);
     if (this.type === 'movie') this.getMovieCast();
     else if (this.type === 'serie') this.getSerieCast();
   }
@@ -36,7 +40,9 @@ export class CastComponent implements OnInit {
         this.cast = data.cast;
         this.cast = this.cast.slice(0, 6);
       },
-      (e) => {},
+      (error) => {
+        this.serieService.handleError(error);
+      },
       () => (this.loaded = true)
     );
   }
@@ -47,7 +53,9 @@ export class CastComponent implements OnInit {
         this.cast = data.cast;
         this.cast = this.cast.slice(0, 6);
       },
-      (e) => {},
+      (error) => {
+        this.movieService.handleError(error);
+      },
       () => (this.loaded = true)
     );
   }

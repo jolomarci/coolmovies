@@ -12,7 +12,6 @@ import { UtilService } from 'src/app/services/util.service';
 })
 export class MovieComponent implements OnInit {
   public movies: Observable<Movie[]>;
-  public maxPage: number = 0;
   public loaded: boolean = false;
 
   public currentPage: number = 1;
@@ -20,6 +19,7 @@ export class MovieComponent implements OnInit {
   public currentGenre: string;
 
   @Input('searchText') searchText: string;
+  /** true if component used in a search */
   public searchState: boolean = false;
 
   constructor(
@@ -32,9 +32,11 @@ export class MovieComponent implements OnInit {
   ngOnInit(): void {
     this.loaded = false;
     this.currentGenre = this.route.snapshot.queryParams['genre'];
+
     this.route.params.subscribe((params) => {
       this.currentPage = this.utils.checkPageParam(+params['page']);
       console.log(this.currentPage, this.currentSortBy, this.currentGenre);
+
       if (this.currentGenre !== undefined) this.getMoviesByGenre();
       else if (this.searchText !== undefined) {
         console.log(this.searchText);
@@ -43,6 +45,7 @@ export class MovieComponent implements OnInit {
       } else this.getMovies();
     });
   }
+
   searchMovies() {
     this.movieService.searchMovies(this.currentPage, this.searchText).subscribe(
       (data) => (this.movies = of(data.results)),
@@ -57,10 +60,7 @@ export class MovieComponent implements OnInit {
 
   public getMovies() {
     this.movieService.getMovies(this.currentPage, this.currentSortBy).subscribe(
-      (data) => {
-        this.movies = of(data.results);
-        this.maxPage = data.total_pages;
-      },
+      (data) => (this.movies = of(data.results)),
       (error) => {
         this.movieService.handleError(error);
       },
@@ -86,6 +86,10 @@ export class MovieComponent implements OnInit {
       );
   }
 
+  /**
+   * Re-renders the page when using different sort by method
+   * @param value new sort by method
+   */
   public setSortBy(value: string) {
     console.log(value);
     this.currentSortBy = value;

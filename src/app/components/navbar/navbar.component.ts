@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,13 +15,14 @@ export class NavbarComponent implements OnInit {
     console.log('search', this.searchText);
   }
 
-  searchRedirect(uri: string) {
-    this.router
-      .navigateByUrl('/', { skipLocationChange: true })
-      .then(() =>
-        this.router.navigate(['/search'], {
-          queryParams: { keyword: this.searchText },
-        })
-      );
+  /**
+   * Required for re-rendering results when the user starts a new search on the Search page
+   */
+  searchRedirect() {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate(['/search'], {
+        queryParams: { keyword: this.searchText },
+      })
+    );
   }
 }

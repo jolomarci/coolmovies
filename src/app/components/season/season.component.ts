@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Season } from 'src/app/models/season';
 import { SerieService } from 'src/app/services/serie.service';
 import { UtilService } from 'src/app/services/util.service';

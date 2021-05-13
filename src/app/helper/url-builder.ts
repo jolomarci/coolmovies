@@ -1,4 +1,6 @@
-// Application Classes
+/**
+ * Helper class for creating url-s for HTTP requests
+ */
 import { QueryStringParameters } from './query-string-parameters';
 
 export class UrlBuilder {
@@ -14,6 +16,10 @@ export class UrlBuilder {
     this.queryString = queryString || new QueryStringParameters();
   }
 
+  /**
+   * Contructs URL (optionally with query parameters)
+   * @returns URL
+   */
   public toString(): string {
     const qs: string = this.queryString ? this.queryString.toString() : '';
     return qs ? `${this.url}?${qs}` : this.url;
