@@ -26,7 +26,9 @@ export class SeasonComponent implements OnChanges {
   getSeason() {
     this.serieService.getSeasonById(this.serieId, this.seasonId).subscribe(
       (season) => (this.season = season),
-      (e) => {},
+      (error) => {
+        this.serieService.handleError(error);
+      },
       () => (this.loadedSeason = true)
     );
   }

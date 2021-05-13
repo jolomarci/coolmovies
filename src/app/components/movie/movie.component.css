@@ -6,6 +6,20 @@
   padding-top: 40px;
 }
 
+.page-item.active .page-link {
+  color: #fff !important;
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+}
+
+.page-item.disabled .page-link {
+  color: #6c757d !important;
+}
+
+.page-item .page-link {
+  color: #343a40 !important;
+}
+
 .card {
   border-radius: 4px;
   background: #fff;

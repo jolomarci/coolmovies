@@ -27,7 +27,9 @@ export class SingleSerieComponent implements OnInit {
         this.serie = serie;
         this.selectedSeason = serie.seasons[0];
       },
-      (e) => {},
+      (error) => {
+        this.serieService.handleError(error);
+      },
       () => (this.loaded = true)
     );
   }

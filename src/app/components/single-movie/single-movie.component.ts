@@ -25,7 +25,9 @@ export class SingleMovieComponent implements OnInit {
     id = +this.route.snapshot.params['id'];
     this.movieService.getMovieById(id).subscribe(
       (movie) => (this.movie = movie),
-      (e) => {},
+      (error) => {
+        this.movieService.handleError(error);
+      },
       () => (this.loaded = true)
     );
   }

@@ -48,7 +48,9 @@ export class SerieComponent implements OnInit {
       (data) => {
         this.series = of(data.results);
       },
-      (e) => {},
+      (error) => {
+        this.serieService.handleError(error);
+      },
       () => {
         this.loaded = true;
       }
@@ -60,7 +62,9 @@ export class SerieComponent implements OnInit {
       (data) => {
         this.series = of(data.results);
       },
-      (e) => {},
+      (error) => {
+        this.serieService.handleError(error);
+      },
       () => {
         this.loaded = true;
       }
@@ -74,7 +78,9 @@ export class SerieComponent implements OnInit {
         (data) => {
           this.series = of(data.results);
         },
-        (e) => {},
+        (error) => {
+          this.serieService.handleError(error);
+        },
         () => {
           this.loaded = true;
         }

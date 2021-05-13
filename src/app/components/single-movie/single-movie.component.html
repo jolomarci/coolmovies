@@ -6,49 +6,47 @@
     crossorigin="anonymous"
   />
 
-  <div class="container">
-    <div class="team-single">
-      <div class="row">
-        <div class="col-lg-4 col-md-5 xs-margin-30px-bottom">
-          <div class="team-single-img">
-            <img src="{{ utils.getImage(movie.poster_path, 'w500') }}" alt="" />
-          </div>
-          <div
-            class="bg-light-gray padding-30px-all md-padding-25px-all sm-padding-20px-all"
+  <div class="team-single">
+    <div class="row">
+      <div class="col-lg-4 col-md-5 xs-margin-30px-bottom">
+        <div class="team-single-img">
+          <img src="{{ utils.getImage(movie.poster_path, 'w500') }}" alt="" />
+        </div>
+        <div
+          class="bg-light-gray padding-30px-all md-padding-25px-all sm-padding-20px-all"
+        >
+          <p class="sm-width-95 sm-margin-auto">
+            <b>Original title: </b> {{ movie.original_title }}
+          </p>
+          <p class="sm-width-95 sm-margin-auto">
+            <b>Release date: </b> {{ movie.release_date }}
+          </p>
+          <p class="sm-width-95 sm-margin-auto">
+            <b>Status: </b> {{ movie.status }}
+          </p>
+          <a
+            class="sm-width-95 sm-margin-auto text-center"
+            href="{{ utils.getIMDBLink(movie.imdb_id) }}"
           >
-            <p class="sm-width-95 sm-margin-auto">
-              <b>Original title: </b> {{ movie.original_title }}
-            </p>
-            <p class="sm-width-95 sm-margin-auto">
-              <b>Release date: </b> {{ movie.release_date }}
-            </p>
-            <p class="sm-width-95 sm-margin-auto">
-              <b>Status: </b> {{ movie.status }}
-            </p>
-            <a
-              class="sm-width-95 sm-margin-auto text-center"
-              href="{{ utils.getIMDBLink(movie.imdb_id) }}"
-            >
-              <b>IMDB</b>
-            </a>
-          </div>
+            <b>IMDB</b>
+          </a>
         </div>
+      </div>
 
-        <div class="col-lg-8 col-md-7">
-          <h1 class="display-4">{{ movie.title }}</h1>
-          <p>{{ movie.overview }}</p>
-          <h5>
-            <a
-              *ngFor="let genre of movie.genres"
-              [routerLink]="['/movies']"
-              [queryParams]="{ genre: genre.id }"
-              class="badge badge-pill badge-secondary"
-              >{{ genre.name }}</a
-            >
-          </h5>
-          <app-cast [type]="type" [typeId]="movie.id"></app-cast>
-          <div class="col-md-12"></div>
-        </div>
+      <div class="col-lg-8 col-md-7">
+        <h1 class="display-4">{{ movie.title }}</h1>
+        <p>{{ movie.overview }}</p>
+        <h5>
+          <a
+            *ngFor="let genre of movie.genres"
+            [routerLink]="['/movies']"
+            [queryParams]="{ genre: genre.id }"
+            class="badge badge-pill badge-secondary"
+            >{{ genre.name }}</a
+          >
+        </h5>
+        <app-cast [type]="type" [typeId]="movie.id"></app-cast>
+        <div class="col-md-12"></div>
       </div>
     </div>
   </div>

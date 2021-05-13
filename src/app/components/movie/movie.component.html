@@ -51,7 +51,7 @@
 </div>
 <nav aria-label="...">
   <ul class="pagination justify-content-center">
-    <li class="page-item">
+    <li class="page-item" [class.disabled]="currentPage === 1">
       <a class="page-link" routerLink="/movies/{{ currentPage - 1 }}"
         >Previous</a
       >

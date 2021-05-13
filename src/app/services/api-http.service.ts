@@ -22,4 +22,8 @@ export class ApiHttpService {
 
   public delete = (url: string, options?: any): Observable<any> =>
     this.http.delete(url, options);
+
+  public handleError(error) {
+    console.log(error.status, error.error.status_message);
+  }
 }

@@ -46,7 +46,9 @@ export class MovieComponent implements OnInit {
   searchMovies() {
     this.movieService.searchMovies(this.currentPage, this.searchText).subscribe(
       (data) => (this.movies = of(data.results)),
-      (e) => {},
+      (error) => {
+        this.movieService.handleError(error);
+      },
       () => {
         this.loaded = true;
       }
@@ -59,7 +61,9 @@ export class MovieComponent implements OnInit {
         this.movies = of(data.results);
         this.maxPage = data.total_pages;
       },
-      (e) => {},
+      (error) => {
+        this.movieService.handleError(error);
+      },
       () => {
         this.loaded = true;
       }
@@ -73,7 +77,9 @@ export class MovieComponent implements OnInit {
         (data) => {
           this.movies = of(data.results);
         },
-        (e) => {},
+        (error) => {
+          this.movieService.handleError(error);
+        },
         () => {
           this.loaded = true;
         }

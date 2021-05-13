@@ -74,4 +74,8 @@ export class MovieService {
       this.auth.getHeaders()
     );
   }
+
+  public handleError(error) {
+    this.http.handleError(error);
+  }
 }
